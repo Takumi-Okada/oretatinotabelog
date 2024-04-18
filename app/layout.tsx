@@ -18,8 +18,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className={inter.className}>
-        <div className="max-w-lg bg-neutral-100 mx-auto">
+      <body className={inter.className + ' bg-neutral-100'}>
+        <div className="max-w-lg mx-auto">
           <Header />
           {children}
         </div>

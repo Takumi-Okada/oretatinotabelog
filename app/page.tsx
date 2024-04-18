@@ -1,6 +1,11 @@
-import StoreRow from "./components/StoreRow";
+import RestaurantRow from "./components/RestaurantRow";
+import CreateRestaurantButton from "./components/CreateRestaurantButton";
+import { getRestaurants } from "./actions/restaurant";
+import { Restaurant, RestaurantFormData } from "./types/types";
 
-export default function Home() {
+export default async function Home() {
+  const restaurants: any = await getRestaurants();
+
   return (
     <main className="min-h-screen w-11/12 mx-auto">
       <div className="w-full flex border-2 border-orange-500 h-14 font-bold rounded-3xl overflow-hidden">
@@ -12,13 +17,11 @@ export default function Home() {
         </div>
       </div>
       <div className="pt-12">
-        <StoreRow rank={1} name={'牡蠣と和牛の奴隷'} evaluation={3.5} />
-        <StoreRow rank={2} name={'赤門'} evaluation={3.3} />
-        <StoreRow rank={3} name={'マクドナルド'} evaluation={3.2} />
-        <StoreRow rank={4} name={'温野菜'} evaluation={2.5} />
-        <StoreRow rank={5} name={'牛角'} evaluation={2.3} />
-        <StoreRow rank={6} name={'スシロー'} evaluation={1.5} />
+        {restaurants.map((restaurant: Restaurant) => (
+          <RestaurantRow key={restaurant.id} rank={1} name={restaurant.name} evaluation={3.5} />
+        ))}
       </div>
+      <CreateRestaurantButton />
     </main>
   );
 }

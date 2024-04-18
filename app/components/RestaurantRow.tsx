@@ -5,14 +5,14 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
-type StoreRowProps = {
+type RestaurantRowProps = {
   rank: number;
   name: string;
   evaluation: number;
 }
 
 
-const StoreRow = ({ rank, name, evaluation }: StoreRowProps) => {
+const RestaurantRow = ({ rank, name, evaluation }: RestaurantRowProps) => {
   return (
     <div className="w-full flex border-b-2 border-orange-500 pb-2 pt-4">
       <div className="w-2/12">{rank}位</div>
@@ -25,4 +25,4 @@ const StoreRow = ({ rank, name, evaluation }: StoreRowProps) => {
   );
 };
 
-export default StoreRow;
+export default RestaurantRow;
