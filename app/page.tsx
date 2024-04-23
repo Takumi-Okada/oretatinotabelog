@@ -1,7 +1,7 @@
 import RestaurantRow from "./components/RestaurantRow";
 import CreateRestaurantButton from "./components/CreateRestaurantButton";
 import { getRestaurants } from "./actions/restaurant";
-import { Restaurant, RestaurantFormData } from "./types/types";
+import { Restaurant } from "./types/types";
 
 export default async function Home() {
   const restaurants: any = await getRestaurants();
@@ -18,7 +18,7 @@ export default async function Home() {
       </div>
       <div className="pt-12">
         {restaurants.map((restaurant: Restaurant) => (
-          <RestaurantRow key={restaurant.id} rank={1} name={restaurant.name} evaluation={3.5} />
+          <RestaurantRow key={restaurant.id} id={restaurant.id} rank={1} name={restaurant.name} evaluation={3.5} />
         ))}
       </div>
       <CreateRestaurantButton />

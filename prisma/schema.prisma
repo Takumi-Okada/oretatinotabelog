@@ -18,14 +18,18 @@ model User {
   id            String       @default(cuid()) @id
   name          String
   thumbnail     String?
-  evaluation    Evaluation[]
+  restaurants   Restaurant[]
+  evaluations   Evaluation[]
 }
 
 model Restaurant {
   id            String       @default(cuid()) @id
+  userId        String
+  genre         String
   name          String
   url           String?
-  evaluation    Evaluation[]
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  evaluations   Evaluation[]
 }
 
 model Evaluation {
