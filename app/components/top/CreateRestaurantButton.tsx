@@ -1,20 +1,31 @@
 "use client";
 import React, { useState } from "react";
-import { createRestaurant } from "../actions/restaurant";
-import { RestaurantFormData } from "../types/types";
+import { createRestaurant } from "../../actions/restaurant";
+import { RestaurantFormData } from "../../types/types";
+import { User } from "../../types/types";
 
 
-const CreateRestaurantButton = () => {
+type Props = {
+  users: User[];
+}
+
+const CreateRestaurantButton = ({ users }: Props) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [isLoadig, setIsLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState<RestaurantFormData>({
+    userId: "",
+    genre: "",
     name: "",
     url: "",
   })
 
-
   const openModal = () => {
-    setFormData({name: "", url: ""});
+    setFormData({
+      userId: "",
+      genre: "",
+      name: "",
+      url: ""
+    });
     setShowModal(true);
   }
 
@@ -22,9 +33,9 @@ const CreateRestaurantButton = () => {
     setShowModal(false);
   }
 
-  const handleChangeInput = (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({...formData, [key] : e.target.value});
-  };
+  const handleChangeInput = (key: string, value: string) => {
+    setFormData({...formData, [key] : value});
+  }
   
   const  handleClick = async () => {
     setIsLoading(true);
@@ -42,7 +53,7 @@ const CreateRestaurantButton = () => {
     <>
       {showModal ? (
         <div className="fixed top-0 left-0 right-0 bottom-0 bg-slate-900 bg-opacity-90 flex justify-center items-center modal">
-          <div className="bg-white p-4 w-11/12 rounded-lg h-72">
+          <div className="bg-white p-4 w-11/12 rounded-lg h-[440px]">
 
             {isLoadig ? (
               <div className="flex justify-center items-center h-full w-full">
@@ -53,15 +64,34 @@ const CreateRestaurantButton = () => {
                 <div className="mb-10">
                   <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2">
+                      プレゼンター
+                    </label>
+                    <select onChange={e => handleChangeInput('userId', e.target.value)} value={formData.userId} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                      <option>選択して！</option>
+                      {users.map((user: User) => (
+                        <option value={user.id} key={user.id}>
+                          {user.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">
                       店名
                     </label>
-                    <input onChange={handleChangeInput('name')} value={formData.name} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="店名" />
+                    <input onChange={e => handleChangeInput('name', e.target.value)} value={formData.name} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="店名" />
+                  </div>
+                  <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                      ジャンル
+                    </label>
+                    <input onChange={e => handleChangeInput('genre', e.target.value)} value={formData.genre} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="ジャンル" />
                   </div>
                   <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2">
                       店舗URL
                     </label>
-                    <input onChange={handleChangeInput('url')} value={formData.url} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="店舗URL" />
+                    <input onChange={e => handleChangeInput('url', e.target.value)} value={formData.url} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="店舗URL" />
                   </div>
                 </div>
                 <div className="flex justify-center">

@@ -11,15 +11,42 @@ export const getRestaurants = async () => {
     return res;
 };
 
+
+export const getRestaurant = async (id: string) => {
+  "use server";
+  
+  const restaurant = await prisma.restaurant.findUnique({
+    where: {
+      id: id,
+    },
+  });
+
+  return restaurant;
+};
+
 export const createRestaurant = async (formData: RestaurantFormData) => {
   "use server";
-  console.log(formData);
+
+  const user = await prisma.user.findUnique({
+    where: {
+      id: formData.userId,
+    },
+  });
+
+  if (!user) {
+    console.error('指定されたユーザーIDが見つかりません');
+    return;
+  }
+
   const res = await prisma.restaurant.create({
     data: {
+      userId: user.id,
+      genre: formData.genre,
       name: formData.name,
       url: formData.url,
     },
   });
+  
   revalidatePath('/');
   return res;
 };

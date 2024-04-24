@@ -4,7 +4,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
-type RestaurantRowProps = {
+type Props = {
   id: string;
   rank: number;
   name: string;
@@ -12,7 +12,7 @@ type RestaurantRowProps = {
 }
 
 
-const RestaurantRow = ({ id, rank, name, evaluation }: RestaurantRowProps) => {
+const RestaurantRow = ({ id, rank, name, evaluation }: Props) => {
   return (
     <Link href={`/restaurant/${id}`} className="w-full flex border-b-2 border-orange-500 pb-2 pt-4">
       <div className="w-2/12">{rank}位</div>

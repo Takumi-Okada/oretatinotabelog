@@ -1,10 +1,13 @@
-import RestaurantRow from "./components/RestaurantRow";
-import CreateRestaurantButton from "./components/CreateRestaurantButton";
+import RestaurantRow from "./components/top/RestaurantRow";
+import CreateRestaurantButton from "./components/top/CreateRestaurantButton";
 import { getRestaurants } from "./actions/restaurant";
+import { getUsers } from "./actions/user";
 import { Restaurant } from "./types/types";
 
 export default async function Home() {
   const restaurants: any = await getRestaurants();
+  const users: any = await getUsers();
+  console.log(users);
 
   return (
     <main className="min-h-screen w-11/12 mx-auto">
@@ -21,7 +24,7 @@ export default async function Home() {
           <RestaurantRow key={restaurant.id} id={restaurant.id} rank={1} name={restaurant.name} evaluation={3.5} />
         ))}
       </div>
-      <CreateRestaurantButton />
+      <CreateRestaurantButton users={users} />
     </main>
   );
 }
