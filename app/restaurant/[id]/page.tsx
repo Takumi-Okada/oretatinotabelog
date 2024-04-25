@@ -2,15 +2,12 @@ import React from "react";
 import Image from "next/image";
 import { getRestaurant } from "@/app/actions/restaurant";
 import { Restaurant, User } from "@/app/types/types";
-import { getUser, getUsers } from "@/app/actions/user";
+import { getUsers } from "@/app/actions/user";
 import RestaurantEvaluation from "@/app/components/restaurant/RestaurantEvaluation";
 
 const RestaurantDetail = async ({ params }: { params: { id: string }}) => {
     const restaurant = await getRestaurant(params.id) as Restaurant;
     const users = await getUsers() as User[];
-    const user = await getUser(restaurant.userId) as User;
-
-
 
     return (
         <div className="w-11/12 mx-auto my-5">
@@ -18,7 +15,7 @@ const RestaurantDetail = async ({ params }: { params: { id: string }}) => {
                 {restaurant.name}<br></br>
                 <span className="text-lg text-slate-400">{restaurant.genre}</span>
             </h1>
-            <a className="w-11/12 mx-auto block text-center bg-orange-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-3" href={restaurant.url} target="_blank">
+            <a className="w-11/12 mx-auto block text-center bg-orange-500 text-white font-bold py-2 px-4 rounded mt-3" href={restaurant.url} target="_blank">
                 お店を開く
             </a>
             <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-8 pb-10">
@@ -28,10 +25,10 @@ const RestaurantDetail = async ({ params }: { params: { id: string }}) => {
                         className="mb-3 rounded-full shadow-lg"            
                         width={100}
                         height={100}
-                        src={user.thumbnail}
+                        src={restaurant.user.thumbnail}
                         alt="Bonnie image"
                     />
-                    <h5 className="text-xl font-medium text-gray-900 dark:text-white">{user.name}</h5>
+                    <h5 className="text-xl font-medium text-gray-900 dark:text-white">{restaurant.user.name}</h5>
                 </div>
             </div>
             <RestaurantEvaluation restaurant={restaurant} users={users} />

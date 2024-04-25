@@ -19,6 +19,15 @@ export const getRestaurant = async (id: string) => {
     where: {
       id: id,
     },
+    include: {
+      user: true,
+      evaluations: {
+        include: {
+          user: true,
+          restaurant: true,
+        }
+      }
+    },
   });
 
   return restaurant;

@@ -98,7 +98,7 @@ const CreateRestaurantButton = ({ users }: Props) => {
                   <button onClick={handleClick} className={"text-white font-bold py-2 px-4 rounded mr-4 " + (isValid ? 'bg-orange-500' : 'bg-gray-500')} disabled={!isValid} >
                     登録する
                   </button>
-                  <button onClick={closeModal} className="bg-red-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                  <button onClick={closeModal} className="bg-red-500 text-white font-bold py-2 px-4 rounded">
                     キャンセル
                   </button>
                 </div>

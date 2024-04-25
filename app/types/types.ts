@@ -27,6 +27,20 @@ type Restaurant = {
     genre: string;
     name: string;
     url: string;
+    user: User;
+    evaluations: Evaluation[];
 }
 
-export type { User, RestaurantFormData, EvaluationFormData, Restaurant };
+type Evaluation = {
+    id: string;
+    userId: string;
+    restaurantId: string;
+    cost: number;
+    taste: number;
+    service: number;
+    atmosphere: number;
+    user: User;
+    restaurant: Restaurant;
+}
+
+export type { User, RestaurantFormData, EvaluationFormData, Restaurant, Evaluation};

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import Slider from '@mui/material/Slider';
-import { EvaluationFormData, User, Restaurant } from "@/app/types/types";
+import { EvaluationFormData, User, Restaurant, Evaluation } from "@/app/types/types";
 import { createEvaluation } from "@/app/actions/evaluation";
 
 
@@ -125,46 +125,34 @@ const RestaurantEvaluation = ({ restaurant, users }: Props) => {
       </div>
       <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-8 pb-10">
           <h2 className="pt-10 pb-2 mb-5 text-center w-11/12 mx-auto border-b-2 border-orange-500">ユーザー毎の評価</h2>
-          <div className="flex justify-center items-center">
-              <span className="text-xl mr-5">岡田</span>
-              <FontAwesomeIcon icon={faStar} className="h-[20px] mr-1" color="#fe9611"/>
-              <span className="text-xl">2.7</span>
-          </div>
-          <div className="flex flex-wrap mt-5 text-center w-3/4 mx-auto">
-              <div className="w-1/2 mb-3">
-                  コスパ：2
+          {restaurant.evaluations.map((evaluation: Evaluation) => (
+            <>
+              <div key={evaluation.id}>
+                <div className="flex justify-center items-center">
+                    <span className="text-xl mr-5">{evaluation.user.name}</span>
+                    <FontAwesomeIcon icon={faStar} className="h-[20px] mr-1" color="#fe9611"/>
+                    <span className="text-xl">{(evaluation.cost + evaluation.taste + evaluation.atmosphere + evaluation.service) / 4}</span>
+                </div>
+                <div className="flex flex-wrap mt-5 text-center w-3/4 mx-auto">
+                    <div className="w-1/2 mb-3">
+                        コスパ：{evaluation.cost}
+                    </div>
+                    <div className="w-1/2 mb-3">
+                        味：{evaluation.taste}
+                    </div>
+                    <div className="w-1/2">
+                        雰囲気：{evaluation.atmosphere}
+                    </div>
+                    <div className="w-1/2">
+                        接客：{evaluation.service}
+                    </div>
+                </div>
               </div>
-              <div className="w-1/2 mb-3">
-                  味：2
-              </div>
-              <div className="w-1/2">
-                  雰囲気：2
-              </div>
-              <div className="w-1/2">
-                  接客：2
-              </div>
-          </div>
-          <hr className="w-11/12 mx-auto my-8"></hr>
-          <div className="flex justify-center items-center">
-              <span className="text-xl mr-5">岡田</span>
-              <FontAwesomeIcon icon={faStar} className="h-[20px] mr-1" color="#fe9611"/>
-              <span className="text-xl">2.7</span>
-          </div>
-          <div className="flex flex-wrap mt-5 text-center w-3/4 mx-auto">
-              <div className="w-1/2 mb-3">
-                  コスパ：2
-              </div>
-              <div className="w-1/2 mb-3">
-                  味：2
-              </div>
-              <div className="w-1/2">
-                  雰囲気：2
-              </div>
-              <div className="w-1/2">
-                  接客：2
-              </div>
-          </div>
-          <button onClick={openModal} className="w-11/12 mx-auto block bg-orange-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-10" >
+            <hr className="w-11/12 mx-auto my-8"></hr>
+            </>
+          ))}
+
+          <button onClick={openModal} className="w-11/12 mx-auto block bg-orange-500 text-white font-bold py-2 px-4 rounded mt-10" >
               評価を登録
           </button>
           {showModal && (
@@ -245,7 +233,7 @@ const RestaurantEvaluation = ({ restaurant, users }: Props) => {
                       <button onClick={handleClick} className={"text-white font-bold py-2 px-4 rounded mr-4 " + (isValid ? 'bg-orange-500' : 'bg-gray-500')} disabled={!isValid} >
                         登録する
                       </button>
-                      <button onClick={closeModal} className="bg-red-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                      <button onClick={closeModal} className="bg-red-500 text-white font-bold py-2 px-4 rounded">
                         キャンセル
                       </button>
                     </div>
