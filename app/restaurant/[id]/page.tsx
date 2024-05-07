@@ -1,19 +1,14 @@
 import React from "react";
 import Image from "next/image";
-import { getRestaurant } from "@/app/actions/restaurant";
 import { Restaurant, User } from "@/app/types/types";
-import { getUsers } from "@/app/actions/user";
 import RestaurantEvaluation from "@/app/components/restaurant/RestaurantEvaluation";
 
 const RestaurantDetail = async ({ params }: { params: { id: string }}) => {
-    const restaurant = await getRestaurant(params.id) as Restaurant;
-    const users = await getUsers() as User[];
+    const restaurantResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/restaurants/${params.id}`);
+    const restaurant = await restaurantResponse.json() as Restaurant;
 
-    // const restaurantResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/restaurants/${params.id}`);
-    // const restaurant = await restaurantResponse.json() as Restaurant;
-
-    // const usersResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`);
-    // const users = await usersResponse.json() as User[];
+    const usersResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`);
+    const users = await usersResponse.json() as User[];
 
     return (
         <div className="w-11/12 mx-auto my-5">
