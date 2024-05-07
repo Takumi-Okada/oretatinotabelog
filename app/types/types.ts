@@ -2,7 +2,6 @@ type User = {
     id: string;
     name: string;
     thumbnail: string;
-
 }
 
 type RestaurantFormData = {
