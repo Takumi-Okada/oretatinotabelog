@@ -25,6 +25,7 @@ export default async function Home() {
         </div>
         <div className="w-1/2 flex justify-center items-center">
           ユーザー
+          {process.env.NEXT_PUBLIC_API_URL}<br></br>
         </div>
       </div>
       <div className="pt-12">
@@ -32,6 +33,7 @@ export default async function Home() {
           <RestaurantRow key={restaurant.id} id={restaurant.id} rank={1} name={restaurant.name} evaluation={3.5} />
         ))}
       </div>
+      
       <CreateRestaurantButton users={users} />
     </main>
   );
