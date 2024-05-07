@@ -8,11 +8,14 @@ export default async function Home() {
   const restaurants: any = await getRestaurants();
   const users: any = await getUsers();
 
-  // const restaurantsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/restaurants`);
+  const restaurantsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/restaurants`);
   // const restaurants = await restaurantsResponse.json() as Restaurant[];
   
-  // const usersResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`);
+  const usersResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`);
   // const users = await usersResponse.json() as User[];
+  console.log(process.env.NEXT_PUBLIC_API_URL);
+  console.log(restaurantsResponse);
+  console.log(usersResponse);
 
   return (
     <main className="min-h-screen w-11/12 mx-auto">
