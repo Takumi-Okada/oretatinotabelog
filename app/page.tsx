@@ -5,11 +5,11 @@ import { getUsers } from "./actions/user";
 import { getRestaurants } from "./actions/restaurant";
 
 export default async function Home() {
-  const restaurants: any = await getRestaurants();
+  // const restaurants: any = await getRestaurants();
   const users: any = await getUsers();
 
   const restaurantsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/restaurants`);
-  // const restaurants = await restaurantsResponse.json() as Restaurant[];
+  const restaurants = await restaurantsResponse.json() as Restaurant[];
   
   const usersResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`);
   // const users = await usersResponse.json() as User[];
@@ -25,7 +25,6 @@ export default async function Home() {
         </div>
         <div className="w-1/2 flex justify-center items-center">
           ユーザー
-          {process.env.NEXT_PUBLIC_API_URL}<br></br>
         </div>
       </div>
       <div className="pt-12">
