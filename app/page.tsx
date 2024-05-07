@@ -1,6 +1,5 @@
 import RestaurantRow from "./components/top/RestaurantRow";
 import CreateRestaurantButton from "./components/top/CreateRestaurantButton";
-import { getRestaurants } from "./actions/restaurant";
 import { Restaurant, User } from "./types/types";
 
 export default async function Home() {
