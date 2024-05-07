@@ -1,13 +1,18 @@
 import RestaurantRow from "./components/top/RestaurantRow";
 import CreateRestaurantButton from "./components/top/CreateRestaurantButton";
 import { Restaurant, User } from "./types/types";
+import { getUsers } from "./actions/user";
+import { getRestaurants } from "./actions/restaurant";
 
 export default async function Home() {
-  const restaurantsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/restaurants`);
-  const restaurants = await restaurantsResponse.json() as Restaurant[];
+  const restaurants: any = await getRestaurants();
+  const users: any = await getUsers();
+
+  // const restaurantsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/restaurants`);
+  // const restaurants = await restaurantsResponse.json() as Restaurant[];
   
-  const usersResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`);
-  const users = await usersResponse.json() as User[];
+  // const usersResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`);
+  // const users = await usersResponse.json() as User[];
 
   return (
     <main className="min-h-screen w-11/12 mx-auto">
