@@ -99,10 +99,22 @@ const RestaurantEvaluation = ({ restaurant, users }: Props) => {
 
   const  handleClick = async () => {
     setIsLoading(true);
-    await createEvaluation(formData);
-    // setIsLoading(false);
-    // setShowModal(false);
-    router.push(`${process.env.NEXT_PUBLIC_URL}/restaurant/${restaurant.id}`);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/evaluation`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          restaurantId: restaurant.id,
+          userId: formData.userId,
+          cost: formData.cost,
+          taste: formData.taste,
+          service: formData.service,
+          atmosphere: formData.atmosphere,
+        }),
+      }
+    );
+    router.refresh();
   }
 
   const validate = () => {

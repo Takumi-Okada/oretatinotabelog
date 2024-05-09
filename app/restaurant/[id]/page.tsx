@@ -4,10 +4,14 @@ import { Restaurant, User } from "@/app/types/types";
 import RestaurantEvaluation from "@/app/components/restaurant/RestaurantEvaluation";
 
 const RestaurantDetail = async ({ params }: { params: { id: string }}) => {
-    const restaurantResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/restaurants/${params.id}`);
+    const restaurantResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/restaurants/${params.id}`, {
+        cache: "no-cache"
+    });
     const restaurant = await restaurantResponse.json() as Restaurant;
 
-    const usersResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`);
+    const usersResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
+        cache: "no-cache"
+    });
     const users = await usersResponse.json() as User[];
 
     return (
