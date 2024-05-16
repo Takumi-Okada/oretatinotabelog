@@ -27,7 +27,6 @@ type Restaurant = {
     name: string;
     url: string;
     user: User;
-    evaluations: Evaluation[];
 }
 
 type Evaluation = {

@@ -5,16 +5,16 @@ export async function GET( request: Request,{ params }: { params: { id: string }
   const id = params.id;
 
   try {
-    const restaurant = await prisma.restaurant.findUnique({
+    const evaluations = await prisma.evaluation.findMany({
       where: {
-        id: id,
+        restaurantId: id,
       },
       include: {
         user: true,
-      },
+      }
     });
 
-    return NextResponse.json(restaurant);
+    return NextResponse.json(evaluations);
   } catch (err) {
     return NextResponse.json(err);
   }

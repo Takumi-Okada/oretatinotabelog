@@ -1,14 +1,21 @@
 import React from "react";
 import Image from "next/image";
-import { Restaurant, User } from "@/app/types/types";
-import RestaurantEvaluation from "@/app/components/restaurant/RestaurantEvaluation";
+import { Restaurant, User, Evaluation } from "@/app/types/types";
+import TotalEvaluation from "@/app/components/restaurant/TotalEvaluation";
+import Evaluations from "@/app/components/restaurant/Evaluations";
 
 const RestaurantDetail = async ({ params }: { params: { id: string }}) => {
+    // レストラン取得
     const restaurantResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/restaurants/${params.id}`, {
         cache: "no-cache"
     });
     const restaurant = await restaurantResponse.json() as Restaurant;
-
+    // 評価取得
+    const evaluationsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/evaluations/restaurant/${params.id}`, {
+        cache: "no-cache"
+    });
+    const evaluations = await evaluationsResponse.json() as Evaluation[];
+    // ユーザー一覧取得
     const usersResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
         cache: "no-cache"
     });
@@ -36,7 +43,8 @@ const RestaurantDetail = async ({ params }: { params: { id: string }}) => {
                     <h5 className="text-xl font-medium text-gray-900 dark:text-white">{restaurant.user.name}</h5>
                 </div>
             </div>
-            <RestaurantEvaluation restaurant={restaurant} users={users} />
+            <TotalEvaluation evaluations={evaluations} />
+            <Evaluations evaluations={evaluations} />
         </div>
     );
 };
