@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { createRestaurant } from "../../actions/restaurant";
 import { RestaurantFormData } from "../../types/types";
 import { User } from "../../types/types";
 import { useRouter } from "next/navigation";
