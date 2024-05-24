@@ -19,23 +19,23 @@ export default async function Home() {
   });
   const evaluations = await evaluationsResponse.json();
 
-  // const totalEvaluations = evaluations.reduce((totalEva: any, eva: any) => {
-  //   const itemNum = 4;
-  //   const totalAve = (eva._avg.cost + eva._avg.taste + eva._avg.service + eva._avg.atmosphere) / itemNum;
-  //   totalEva[eva.restaurantId] = Math.floor( totalAve * 10 ) / 10;
-  //   return totalEva;
-  // }, {} as Record<string, number>);
+  const totalEvaluations = evaluations.reduce((totalEva: any, eva: any) => {
+    const itemNum = 4;
+    const totalAve = (eva._avg.cost + eva._avg.taste + eva._avg.service + eva._avg.atmosphere) / itemNum;
+    totalEva[eva.restaurantId] = Math.floor( totalAve * 10 ) / 10;
+    return totalEva;
+  }, {} as Record<string, number>);
 
-  // const restaurantsWithEvaluation = restaurants.map((restaurant: Restaurant) => {
-  //   const returnValue = {
-  //     'id': restaurant.id,
-  //     'name': restaurant.name,
-  //     'totalEvaluation': totalEvaluations[restaurant.id] || 0
-  //   }
-  //   return returnValue
-  // })
+  const restaurantsWithEvaluation = restaurants.map((restaurant: Restaurant) => {
+    const returnValue = {
+      'id': restaurant.id,
+      'name': restaurant.name,
+      'totalEvaluation': totalEvaluations[restaurant.id] || 0
+    }
+    return returnValue
+  })
 
-  // restaurantsWithEvaluation.sort((a, b) => b.totalEvaluation - a.totalEvaluation);
+  restaurantsWithEvaluation.sort((a, b) => b.totalEvaluation - a.totalEvaluation);
 
   return (
     <main className="min-h-screen w-11/12 mx-auto">
