@@ -50,8 +50,9 @@ const TotalEvaluation = ({ evaluations }: Props) => {
         }
       )
     }
-
-    calculationTotalEvaluation();
+    if(evaluations.length > 0) {
+      calculationTotalEvaluation();
+    }
   }, []);
 
   return (

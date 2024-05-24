@@ -31,7 +31,6 @@ export async function POST( request: Request ) {
         genre: genre,
         name: name,
         url: url,
-        totalEvaluation: 0
       },
     }); 
     return NextResponse.json(restaurant);

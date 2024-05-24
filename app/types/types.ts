@@ -2,7 +2,6 @@ type User = {
     id: string;
     name: string;
     thumbnail: string;
-    totalEvaluation: number;
 }
 
 type RestaurantFormData = {
@@ -27,7 +26,6 @@ type Restaurant = {
     genre: string;
     name: string;
     url: string;
-    totalEvaluation: number;
     user: User;
 }
 

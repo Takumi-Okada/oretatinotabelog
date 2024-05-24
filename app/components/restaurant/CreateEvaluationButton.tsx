@@ -104,9 +104,7 @@ const CreateEvaluationButton = ({ restaurant, users }: Props) => {
         }),
       }
     );
-    setIsLoading(false);
-    setShowModal(false);
-    router.refresh();
+    window.location.reload();
   }
 
   const validate = () => {

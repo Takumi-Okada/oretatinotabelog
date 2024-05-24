@@ -54,7 +54,7 @@ const CreateRestaurantButton = ({ users }: Props) => {
         }),
       }
     );
-    router.refresh();
+    window.location.reload();
   }
 
   const validate = () => {
