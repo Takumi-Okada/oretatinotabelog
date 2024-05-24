@@ -4,15 +4,15 @@ import { Restaurant, User } from "./types/types";
 
 export default async function Home() {
 
-  // const restaurantsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/restaurants`, {
-  //     cache: "no-cache"
-  // });
-  // const restaurants = await restaurantsResponse.json() as Restaurant[];
+  const restaurantsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/restaurants`, {
+      cache: "no-cache"
+  });
+  const restaurants = await restaurantsResponse.json() as Restaurant[];
   
-  // const usersResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
-  //   cache: "no-cache"
-  // });
-  // const users = await usersResponse.json() as User[];
+  const usersResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`, {
+    cache: "no-cache"
+  });
+  const users = await usersResponse.json() as User[];
   
   // const evaluationsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/evaluations/avg`, {
   //   cache: "no-cache"
