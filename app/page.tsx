@@ -14,10 +14,10 @@ export default async function Home() {
   });
   const users = await usersResponse.json() as User[];
   
-  // const evaluationsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/evaluations/avg`, {
-  //   cache: "no-cache"
-  // });
-  // const evaluations = await evaluationsResponse.json();
+  const evaluationsResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/evaluations/avg`, {
+    cache: "no-cache"
+  });
+  const evaluations = await evaluationsResponse.json();
 
   // const totalEvaluations = evaluations.reduce((totalEva: any, eva: any) => {
   //   const itemNum = 4;
