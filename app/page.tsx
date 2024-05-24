@@ -47,13 +47,13 @@ export default async function Home() {
           ユーザー
         </div>
       </div>
-      {/* <div className="pt-12">
+      <div className="pt-12">
         {restaurantsWithEvaluation.map((restaurant: any, i: number) => (
           <RestaurantRow key={restaurant.id} id={restaurant.id} rank={i+1} name={restaurant.name} evaluation={restaurant.totalEvaluation} />
         ))}
       </div>
       
-      <CreateRestaurantButton users={users} /> */}
+      <CreateRestaurantButton users={users} />
     </main>
   );
 }
