@@ -20,4 +20,4 @@ export async function GET( request: Request,{ params }: { params: { id: string }
   }
 }
 
-export const fetchCache = 'force-no-store';
+export const revalidate = 0;

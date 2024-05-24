@@ -19,4 +19,4 @@ export async function GET( request: Request ) {
   }
 }
 
-export const fetchCache = 'force-no-store';
+export const revalidate = 0;
