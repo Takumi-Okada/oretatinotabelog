@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { createRestaurant } from "../../actions/restaurant";
 import { RestaurantFormData } from "../../types/types";
 import { User } from "../../types/types";
+import { useRouter } from "next/navigation";
 
 
 type Props = {
@@ -10,6 +11,7 @@ type Props = {
 }
 
 const CreateRestaurantButton = ({ users }: Props) => {
+  const router = useRouter();
   const [showModal, setShowModal] = useState<boolean>(false);
   const [isLoadig, setIsLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState<RestaurantFormData>({
@@ -36,12 +38,23 @@ const CreateRestaurantButton = ({ users }: Props) => {
   const handleChangeInput = (key: string, value: string) => {
     setFormData({...formData, [key] : value});
   }
-  
+
   const  handleClick = async () => {
     setIsLoading(true);
-    await createRestaurant(formData);
-    setIsLoading(false);
-    setShowModal(false);
+    await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/restaurants`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          userId: formData.userId,
+          genre: formData.genre,
+          name: formData.name,
+          url: formData.url
+        }),
+      }
+    );
+    router.refresh();
   }
 
   const validate = () => {

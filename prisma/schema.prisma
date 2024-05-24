@@ -15,21 +15,23 @@ datasource db {
 }
 
 model User {
-  id            String       @default(cuid()) @id
-  name          String
-  thumbnail     String?
-  restaurants   Restaurant[]
-  evaluations   Evaluation[]
+  id              String       @default(cuid()) @id
+  name            String
+  thumbnail       String?
+  totalEvaluation Float
+  restaurants     Restaurant[]
+  evaluations     Evaluation[]
 }
 
 model Restaurant {
-  id            String       @default(cuid()) @id
-  userId        String
-  genre         String
-  name          String
-  url           String?
-  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  evaluations   Evaluation[]
+  id              String       @default(cuid()) @id
+  userId          String
+  genre           String
+  name            String
+  url             String?
+  totalEvaluation Float
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  evaluations     Evaluation[]
 }
 
 model Evaluation {

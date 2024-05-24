@@ -9,3 +9,33 @@ export async function GET() {
     return NextResponse.json(err);
   }
 }
+
+export async function POST( request: Request ) {
+  const { userId, genre, name, url } = await request.json();
+
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+  
+    if (!user ) {
+      console.error('指定されたユーザーIDが見つかりません');
+      return;
+    }
+  
+    const restaurant = await prisma.restaurant.create({
+      data: {
+        userId: user.id,
+        genre: genre,
+        name: name,
+        url: url,
+        totalEvaluation: 0
+      },
+    }); 
+    return NextResponse.json(restaurant);
+  } catch (err) {
+    return NextResponse.json(err);
+  }
+}

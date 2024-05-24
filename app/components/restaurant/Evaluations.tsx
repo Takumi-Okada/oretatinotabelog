@@ -2,15 +2,18 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { Evaluation } from "@/app/types/types";
+import { Restaurant, User, Evaluation } from "@/app/types/types";
+import CreateEvaluationButton from "./CreateEvaluationButton";
 
 
 type Props = {
+  restaurant: Restaurant;
+  users: User[];
   evaluations: Evaluation[];
 }
 
 
-const Evaluations = ({ evaluations }: Props) => {
+const Evaluations = ({restaurant, users, evaluations }: Props) => {
 
   return (
     <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-8 pb-10">
@@ -41,6 +44,7 @@ const Evaluations = ({ evaluations }: Props) => {
           <hr className="w-11/12 mx-auto my-8"></hr>
           </div>
         ))}
+        <CreateEvaluationButton restaurant={restaurant} users={users} />
     </div>
   );
 };

@@ -44,7 +44,7 @@ const RestaurantDetail = async ({ params }: { params: { id: string }}) => {
                 </div>
             </div>
             <TotalEvaluation evaluations={evaluations} />
-            <Evaluations evaluations={evaluations} />
+            <Evaluations restaurant={restaurant} users={users} evaluations={evaluations} />
         </div>
     );
 };
